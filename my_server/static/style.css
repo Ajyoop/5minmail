@@ -1,0 +1,74 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.header {
+    height: 85px;
+    background-color: #51ADCF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .logo{
+      height: 75px;
+      padding: 8px;
+  }
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbtn a{
+  color: white;
+  padding: 30px 16px;
+  text-decoration: none;
+
+}
+
+.navbtn a:hover {
+    background-color: #48a4c5;
+    color: white;
+    text-decoration: none;
+  }
+
+
+.signupform{
+    margin-top: 30px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #formbox{
+      width: 300px;
+  }
+
+  .footer {
+    
+    background-color: #51ADCF;
+    height: 50px;
+    margin-top: -50px;
+  }
+
+.centered{
+    width: 80%;
+    margin-left: 10%;
+}
+
+  .cards {
+    display: flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+ }
+
