@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'b9dfdf3f8d2bb591f39d5a1337dbacd0'
 def start():
     r = RandomWords()
     newmail = r.get_random_word()
-    newmail += 'gluffa.se'
+    newmail += '@gluffa.se'
     return render_template('start.html', newmail=newmail)
 
 
