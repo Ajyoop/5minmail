@@ -1,7 +1,7 @@
-from my_server import db, login_manager
+from my_server import db, lm
 from flask_login import UserMixin
 
-@login_manager.user_loader
+@lm.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 

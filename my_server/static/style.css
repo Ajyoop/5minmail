@@ -72,8 +72,13 @@ ul{
     flex-wrap: wrap;
  }
 
- .container{
-  
+.mailfield{
+  position: relative;
+}
 
- }
-
+.fa-paste{
+  top: 50;
+  right: 0;
+  position: absolute;
+  color: gray;
+}

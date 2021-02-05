@@ -1,7 +1,8 @@
-from my_server import app, db, bcrypt
+from my_server import app, db, bcrypt, lm
 from flask import render_template, url_for, flash, redirect
 from my_server.forms import LoginFrom, RegistrationFrom
 from my_server.dbhandler import User
+from flask_login import LoginManager
 from random_word import RandomWords
 
 
@@ -13,18 +14,22 @@ app.config['SECRET_KEY'] = 'b9dfdf3f8d2bb591f39d5a1337dbacd0'
 @app.route('/start', methods=['GET'])
 def start():
     r = RandomWords()
-    newmail = r.get_random_word()
-    newmail += '@gluffa.se'
+    try:
+        newmail = r.get_random_word()
+        newmail += '@gluffa.se'
+    except:
+        newmail = 'yoinker@gluffa.se'
     return render_template('start.html', newmail=newmail)
 
 
 @app.route('/login')
 def login():
+
     form = LoginFrom()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-           # login_user(user, remember=form.rememberme.data)
+            #login_user(user, remember=form.rememberme.data)
             flash('You have been logged in', 'success')
             return redirect(url_for('start'))
         else:
@@ -44,6 +49,11 @@ def signup():
         return redirect(url_for('start'))
     return render_template('signup.html', form=form)
 
+
+@app.route('/logout')
+def logout():
+    
+    return render_template('mails')
 
 @app.route('/mails')
 def recieve_mail():
