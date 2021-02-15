@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
 
 class Mail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    sender = db.Column(db.String(120), unique=True, nullable=False)
     to = db.Column(db.String(120), unique=True, nullable=False)
-    fromt = db.Column(db.String(120), unique=True, nullable=False)
     subject = db.Column(db.String(88), unique=True, nullable=False)
-    text = db.Column(db.String(2000), nullable=False)
+    body = db.Column(db.String(2000), nullable=False)
   

@@ -1,9 +1,9 @@
 from my_server import app, db, bcrypt, lm
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from my_server.forms import LoginFrom, RegistrationFrom
 from my_server.dbhandler import User
 from flask_login import LoginManager
-from random_word import RandomWords
+#from random_word import RandomWords
 
 
 
@@ -13,9 +13,9 @@ app.config['SECRET_KEY'] = 'b9dfdf3f8d2bb591f39d5a1337dbacd0'
 @app.route('/')
 @app.route('/start', methods=['GET'])
 def start():
-    r = RandomWords()
+   # r = RandomWords()
     try:
-        newmail = r.get_random_word()
+    #    newmail = r.get_random_word()
         newmail += '@gluffa.se'
     except:
         newmail = 'yoinker@gluffa.se'
@@ -55,8 +55,10 @@ def logout():
     
     return render_template('mails')
 
-@app.route('/mails')
+@app.route('/email', methods=['POST'])
 def recieve_mail():
-    return render_template('mails')
-
-
+    print('From:', request.form['from'])
+    print('To:', request.form['to'])
+    print('Subject:', request.form['subject'])
+    print('Body:', request.form['text'])
+    return ''
