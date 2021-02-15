@@ -1,7 +1,7 @@
-from my_server import app, db, bcrypt, lm
+from my_server import app, db, bcrypt
 from flask import render_template, url_for, flash, redirect, request
 from my_server.forms import LoginFrom, RegistrationFrom
-from my_server.dbhandler import User
+from my_server.dbhandler import User, Mail
 from flask_login import LoginManager
 #from random_word import RandomWords
 
@@ -57,8 +57,6 @@ def logout():
 
 @app.route('/email', methods=['POST'])
 def recieve_mail():
-    print('From:', request.form['from'])
-    print('To:', request.form['to'])
-    print('Subject:', request.form['subject'])
-    print('Body:', request.form['text'])
-    return ''
+    new_mail = Mail(request.form['from'], request.form['to'], request.form['subject'],request.form['text'])
+    db.session.add(new_mail)
+    db.session.commit()
