@@ -1,12 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container p-5 bg-dark text-white">
-        <h3 class="h3">Your 5 minute mail:</h2>
-        <div class="mailfield container-fluid bg-white p-1 my-1">
-            <h2 class="h2 text-center text-dark">{{newmail}}</h2>
-            <i class="fas fa-paste"></i>
+    <!-- wrapperdiv -->
+    <div class="container d-flex justify-content-center">
+        <!-- gray div -->
+        <div class="container w-50 bg-secondary d-flex justify-content-center">
+            <div class="container">
+
+
+
+            </div>
+            
+            
+            <!-- wrapper run ranodmmail -->
+            <div class="container d-flex justify-content-center bg-white rounded border">
+                <h2 class=" text-dark">{{newmail}}</h2>
+            </div>
+
+            <!-- mailbox -->
+            <div>
+
+
+            </div>
+
         </div>
     </div>
+    
 
 
 
