@@ -1,28 +1,39 @@
+from typing import NoReturn
 from my_server import app, db, bcrypt
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, session
 from my_server.forms import LoginFrom, RegistrationFrom
 from my_server.dbhandler import User, Mail
 from flask_login import LoginManager
-#from random_word import RandomWords
-
-
+from RandomWordGenerator import RandomWord
 
 app.config['SECRET_KEY'] = 'b9dfdf3f8d2bb591f39d5a1337dbacd0'
+
+
+def gotmail():
+    if 'mail' in session.keys():
+        return True
+    return False
+
+
+def newMail():
+    rw = RandomWord(constant_word_size=10)
+    newmail = rw.generate()
+    newmail += '@gluffa.se'
+    return newmail
 
 
 @app.route('/')
 @app.route('/start', methods=['GET'])
 def start():
-   # r = RandomWords()
-    try:
-    #    newmail = r.get_random_word()
-        newmail += '@gluffa.se'
-    except:
-        newmail = 'yoinker@gluffa.se'
-    return render_template('start.html', newmail=newmail)
+    if gotmail():
+        return render_template('start.html', mail=session['mail'], title='Start')
+    else:
+        return render_template('start.html', mail=newMail(), title='Start')
+
+    
 
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
 
     form = LoginFrom()
@@ -46,17 +57,23 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash('Account created. Please log in.', 'success')
-        return redirect(url_for('start'))
-    return render_template('signup.html', form=form)
+        return redirect(url_for('login'))
+    return render_template('signup.html', title='Sign up!', form=form)
 
 
 @app.route('/logout')
 def logout():
-    
     return render_template('mails')
 
 @app.route('/email', methods=['POST'])
 def recieve_mail():
-    new_mail = Mail(request.form['from'], request.form['to'], request.form['subject'],request.form['text'])
+    print("tjo katt")
+
+    new_mail = Mail(sender=request.form['from'], to=request.form['to'], subject=request.form['subject'], body=request.form['text'])
     db.session.add(new_mail)
     db.session.commit()
+    print('From:', request.form['from'])
+    print('To:', request.form['to'])
+    print('Subject:', request.form['subject'])
+    print('Body:', request.form['text'])
+    return ''
