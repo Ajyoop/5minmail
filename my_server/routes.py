@@ -16,7 +16,7 @@ def gotmail():
 
 
 def newMail():
-    rw = RandomWord(constant_word_size=10)
+    rw = RandomWord(max_word_size=10)
     newmail = rw.generate()
     newmail += '@gluffa.se'
     return newmail
