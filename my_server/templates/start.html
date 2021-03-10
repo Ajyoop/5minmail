@@ -1,45 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
-    <!-- wrapperdiv -->
-    <div class="container d-flex justify-content-center">
-        <!-- gray div -->
-        <div class="container w-50 bg-secondary d-flex justify-content-center">
-            <div class="container">
+    
+        <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-6">
+            <div class="container bg-secondary">
 
-
-
+                <!-- wrapper run ranodmmail -->
+                <div class="container bg-white rounded border gap-3">
+                    <h2 class=" text-dark">{{mail}}</h2>
+                </div>
+    
+                <!-- mailbox -->
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">From</th>
+                            <th scope="col">Subjct</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                
+                
+                        </tbody>
+                
+                    </table>
+    
+                </div>
+                
+    
+    
+    
             </div>
-            
-            
-            <!-- wrapper run ranodmmail -->
-            <div class="container d-flex justify-content-center bg-white rounded border">
-                <h2 class=" text-dark">{{newmail}}</h2>
-            </div>
-
-            <!-- mailbox -->
-            <div>
 
 
-            </div>
 
         </div>
-    </div>
+        <div class="col ">
+            
+        </div>
+        </div>
+        
+   
+
     
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">From</th>
-            <th scope="col">Subjct</th>
-        </tr>
-        </thead>
-        <tbody>
-            {}
-
-
-        </tbody>
-
-    </table>
+    
 
 
 

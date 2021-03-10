@@ -67,13 +67,7 @@ def logout():
 
 @app.route('/email', methods=['POST'])
 def recieve_mail():
-    print("tjo katt")
-
     new_mail = Mail(sender=request.form['from'], to=request.form['to'], subject=request.form['subject'], body=request.form['text'])
     db.session.add(new_mail)
     db.session.commit()
-    print('From:', request.form['from'])
-    print('To:', request.form['to'])
-    print('Subject:', request.form['subject'])
-    print('Body:', request.form['text'])
     return ''
