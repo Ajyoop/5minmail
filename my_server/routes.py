@@ -40,13 +40,15 @@ def login():
         return redirect(url_for('start'))
     form = LoginFrom()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            #login_user(user, remember=form.rememberme.data)
+            login_user(user, remember=form.rememberme.data)
             flash('You have been logged in', 'success')
+            print('23213333333333')
             return redirect(url_for('start'))
         else:
-            return redirect
+            print('asddddddddddddddddddd')
+            flash('Incorrect email or password', 'danger')
     return render_template('login.html', title='5minmail', form=form)
 
 
@@ -55,7 +57,7 @@ def signup():
     form = RegistrationFrom()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_pw)
+        user = User(username=form.username.data, password=hashed_pw)
         db.session.add(user)
         db.session.commit()
         flash('Account created. Please log in.', 'success')
@@ -66,6 +68,7 @@ def signup():
 @app.route('/logout')
 def logout():
     logout_user()
+    flash('You have benn logged out', 'success')
     return redirect(url_for('start'))
 
 @app.route('/email', methods=['POST'])
@@ -93,4 +96,5 @@ def refeshdata(data):
 @socketio.on('mailrefresh')
 def mailrefresh():
     data = json.dumps(serializeAll(getMails(session['mail'])))
+    print(data)
     socketio.emit('mailrefresh', data)

@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // sending a connect request to the server.
-    var socket = io.connect('http://285ad64a624c.ngrok.io');
+    var socket = io.connect('localhost:8000');
     $(".refresh").click( function(){
         socket.emit('mailrefresh')
         console.log("click!")
@@ -21,21 +21,31 @@ $(document).ready(function(){
                 '<td style="padding-left:10px;">'+mails[i].sender+'</td>'+
                 '<td>'+mails[i].subject+'</td>'+
                 '<td>'+mails[i].subject+'</td>'+
-                '</tr>'+'<tr class="hideablecontent">'+'<td>'+mails[i].body+'</td>' +'</r>'
+                '</tr><div class="hideablecontent"><tr><td>'+mails[i].body+'</td></tr></div>'
 
-        }
+        }-
         console.log(s)
         $("#tbl").empty();
-        //$(".hideablecontent").hide()
+        $(".hideablecontent").hide()
         $("#tbl").append(s).hide().show('slow');
+        $(".hideablecontent").hide()
 
         $(".mail").off("click");
         $(".mail").click( function(){
-            console.log("nigger")
-            $(".hideablecontent").show("slow");
+            console.log('yeeeeet')
+            $(".hideablecontent").slideToggle()
         });
 
     });
+    $(".alert").delay(3000).slideUp(300);
+
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+      }
 
    });
 

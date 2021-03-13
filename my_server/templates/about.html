@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container main">
+        <div class="info">
+            <h3>5minmail</h3>
+            <p>5 minute mail is a webiste created to avoid
+                spam emails or sign up to websites where using your 
+                own email is not an option.</p>
+        </div>
+        <div class="stats">
+            <h2>Website stats:</h2>
+            <div class="stat">{{totmails}}</div>
+            <div class="stat">{{totaddresses}}</div>
+            <div class="stat">{{users}}</div>
+            {% if current_user.is_authenticated %}
+                <h3>{{user.username}}'s Stats</h3>
+                <div class="stat"></div>    
+            {% endif %}
+        </div>
+
+    </div>
+
+
+{% endblock content %}

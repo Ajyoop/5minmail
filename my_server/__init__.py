@@ -7,7 +7,7 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
-lm = LoginManager(app)
+loginmanager = LoginManager(app)
 socketio = SocketIO(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 from my_server import routes

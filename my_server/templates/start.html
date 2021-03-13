@@ -2,30 +2,41 @@
 {% block content %}
     
 <div class="container main">
-    <h1 class="inboxtxt">Step 1: Use temporary e-mail address</h1>
-        <div class="tempmailbox rounded">
-            <h2>{{mailadd}}</h2>
-        
+    <div class="content">
+        <h1 class="inboxtxt">Step 1: Use temporary e-mail address</h1>
+            <div class="tempmailbox rounded">
+                <h2 class="mailtext">{{mailadd}}<button onclick="copyToClipBoard('#mailtext')"><span class="bi-clipboard"></span></button></h2>
+            
+            </div>
+
+        <h1 class="inboxtxt">Step 2: Receive emails</h1>
+        <div class="mailbox rounded shadow">
+            <table class="mailtable">
+                <thead class="thead">
+                <tr class="thead">
+                    <th class="hitem">From</th>
+                    <th class="hitem">Subject</th>
+                    <th class="hitem">Content</th>
+                </tr>
+                </thead>
+                <tbody id="tbl">
+                    
+                </tbody>  
+            </table>
         </div>
+        <button class="btn btn-primary refresh"><span class="glyphicon glyphicon-refresh"></span>Refresh</button>
+    </div>
+    <div class="sidebar rounded">
+        <h3>Welcome</h3>
+        <p>Login to save your mails</p>
+        {% if current_user.is_authenticated %}
 
-    <h1 class="inboxtxt">Step 2: Receive emails</h1>
-    <div class="mailbox rounded shadow">
-        <table class="mailtable">
-            <thead class="thead">
-              <tr class="thead">
-                <th class="hitem">From</th>
-                <th class="hitem">Subject</th>
-                <th class="hitem">Content</th>
-              </tr>
-            </thead>
-            <tbody id="tbl">
-                
-            </tbody>  
-    </table>
+        {% else %}
+            <a class="btn btn-primary loginbutton" href="{{url_for('login')}}">Log in</a>
+            <a class="btn btn-primary loginbutton" href="{{url_for('signup')}}">Sign up</a>
+        {% endif %}
+    </div>
 </div>
-    <button class="btn btn-primary refresh"><span class="glyphicon glyphicon-refresh"></span>Refresh</button>
-
-
 
 
 
