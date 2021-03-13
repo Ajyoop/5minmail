@@ -1,54 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
     
-        <div class="row">
-        <div class="col">
-        </div>
-        <div class="col-6">
-            <div class="container bg-secondary">
-
-                <!-- wrapper run ranodmmail -->
-                <div class="container bg-white rounded border gap-3">
-                    <h2 class=" text-dark">{{mail}}</h2>
-                </div>
-    
-                <!-- mailbox -->
-                <div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">From</th>
-                            <th scope="col">Subjct</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            
-                
-                
-                        </tbody>
-                
-                    </table>
-    
-                </div>
-                
-    
-    
-    
-            </div>
-
-
-
-        </div>
-        <div class="col ">
-            
-        </div>
-        </div>
+<div class="container main">
+    <h1 class="inboxtxt">Step 1: Use temporary e-mail address</h1>
+        <div class="tempmailbox rounded">
+            <h2>{{mailadd}}</h2>
         
-   
+        </div>
 
-    
+    <h1 class="inboxtxt">Step 2: Receive emails</h1>
+    <div class="mailbox rounded shadow">
+        <table class="mailtable">
+            <thead class="thead">
+              <tr class="thead">
+                <th class="hitem">From</th>
+                <th class="hitem">Subject</th>
+                <th class="hitem">Content</th>
+              </tr>
+            </thead>
+            <tbody id="tbl">
+                
+            </tbody>  
+    </table>
+</div>
+    <button class="btn btn-primary refresh"><span class="glyphicon glyphicon-refresh"></span>Refresh</button>
 
-    
 
 
 

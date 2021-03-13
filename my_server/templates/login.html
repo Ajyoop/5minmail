@@ -1,30 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="centered">
-        
-            
-        <form method="POST" action="">
-            {{form.hidden_tag()}}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Sign in</legend>
+    <div class="signupform">
+        <div class="content section" id="formbox">
+            <form method="POST" action="">
+                {{form.hidden_tag()}}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Sign in</legend>
+                    <div class="form-group">
+                        {{form.email.label(class="form-control-label")}}
+                        {{form.email(class="form-control from-control-lg")}}
+                    </div>
+                    <div class="form-group">
+                        {{form.password.label(class="form-control-label")}}
+                        {{form.password(class="form-control from-control-lg")}}
+                    </div>
+                    <div>
+                        {{form.rememberme(class="form-control-check-input")}}
+                        {{form.rememberme.label(class="form-control-label")}}
+                        
+                    </div>
+                </fieldset>
                 <div class="form-group">
-                    {{form.email.label(class="form-control-label")}}
-                    {{form.email(class="form-control from-control-lg")}}
+                        {{form.submit(class="btn btn-outline-info")}}
                 </div>
-                <div class="form-group">
-                    {{form.password.label(class="form-control-label")}}
-                    {{form.password(class="form-control from-control-lg")}}
-                </div>
-                <div>
-                    {{form.rememberme(class="form-control-check-input")}}
-                    {{form.rememberme.label(class="form-control-label")}}
-                    
-                </div>
-            </fieldset>
-            <div class="form-group">
-                    {{form.submit(class="btn btn-outline-info")}}
-            </div>
-        </form>
+            </form>
+        </div>
             
         
     </div>

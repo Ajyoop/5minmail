@@ -28,10 +28,8 @@ class RegistrationFrom(FlaskForm):
 
 
 class LoginFrom(FlaskForm):
-    #username = StringField('Username', validators=[DataRequired(), Length(min=4-, max=20)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired()])
 
     password = PasswordField('Password', validators=[DataRequired()])
-
     rememberme = BooleanField('Remember me')
     submit = SubmitField('Log In')

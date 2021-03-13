@@ -2,6 +2,105 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    overflow: hidden;
+}
+
+h2::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
+  
+}
+
+html,
+body {
+    height: 100%;
+    
+}
+
+.wrapper{
+  height: 100%;
+  background: #667db6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    flex-flow: column;
+    
+    
+}
+
+
+.mailbox{
+    height: 45vh;
+    width: 70%;
+    display: flex;
+    border-radius: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: white;
+    padding: 2px;
+}
+
+
+.thead{
+  justify-content: space-evenly;
+  height: 4vh;
+  border-bottom: 3px solid black;
+
+}
+
+.mailtable{
+  width: 100%;
+  
+  
+}
+
+.mail{
+  box-sizing: border-box;
+  height: 6vh;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  
+}
+
+.mail:hover{
+  box-sizing: border-box;
+  background-color: rgb(145, 220, 223);
+  
+  
+}
+
+.inboxtxt{
+  font-size:2rem;
+  color: white;
+}
+
+.tempmailbox{
+  width: 70%;
+  padding:8px;
+  height:6%;
+  text-align: center;
+  border: 2px solid black;
+  background-color: #ff4e00;
+    background-image: linear-gradient(315deg, #ec9f05 0%,#ff4d00cb 74%);
+  margin-bottom: 30px;
+}
+
+.mailbox{
+  border: 2px solid black;
+  
+}
+
+.refresh{
+    width: 7%;
+    margin-top: 1vh;
 }
 
 ul{
@@ -10,7 +109,8 @@ ul{
 
 .header {
     height: 85px;
-    background-color: #51ADCF;
+    background-color: #ff4e00;
+    background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,27 +150,6 @@ ul{
     align-items: center;
   }
 
-  #formbox{
-      width: 300px;
-  }
-
-  .footer {
-    
-    background-color: #51ADCF;
-    height: 50px;
-    margin-top: -50px;
-  }
-
-.centered{
-    width: 80%;
-    margin-left: 10%;
-}
-
-  .cards {
-    display: flex;
-    justify-content:space-between;
-    flex-wrap: wrap;
- }
 
 .mailfield{
   position: relative;

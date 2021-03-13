@@ -1,4 +1,5 @@
 from my_server import db, lm
+from datetime import datetime
 from flask_login import UserMixin
 
 @lm.user_loader
@@ -18,8 +19,20 @@ class User(db.Model, UserMixin):
 
 class Mail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     sender = db.Column(db.String(120), nullable=False)
     to = db.Column(db.String(120), nullable=False)
     subject = db.Column(db.String(88), nullable=False)
     body = db.Column(db.String(2000), nullable=False)
-  
+    
+    @property
+    def serialize(self):
+        return {
+            'sender': self.sender,
+            'to': self.to,
+            'subject': self.subject,
+            'body': self.body
+        }
+
+    def __repr__(self):
+        return f'{self.sender}, {self.subject}, '
