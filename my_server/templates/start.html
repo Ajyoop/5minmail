@@ -4,13 +4,13 @@
 <div class="container main">
     <div class="content">
         <h1 class="inboxtxt">Step 1: Use temporary e-mail address</h1>
-            <div class="tempmailbox rounded">
-                <h2 class="mailtext">{{mailadd}}<button onclick="copyToClipBoard('#mailtext')"><span class="bi-clipboard"></span></button></h2>
-            
+            <div class="tempmailbox">
+                <h2 id="mailtext" data-address="{{mailadd}}">{{mailadd}}<button class="copybutton" id="copybutton" data-toggle="popover" data-content="Copied!"><span class="bi-clipboard"></span></button></h2>
+                
             </div>
 
         <h1 class="inboxtxt">Step 2: Receive emails</h1>
-        <div class="mailbox rounded shadow">
+        <div class="mailbox shadow">
             <table class="mailtable">
                 <thead class="thead">
                 <tr class="thead">
@@ -26,14 +26,25 @@
         </div>
         <button class="btn btn-primary refresh"><span class="glyphicon glyphicon-refresh"></span>Refresh</button>
     </div>
-    <div class="sidebar rounded">
-        <h3>Welcome</h3>
-        <p>Login to save your mails</p>
+    <div class="sidebar">
+        <h3>
+            Welcome,
+            {% if current_user.is_authenticated %} 
+                {{current_user.username}} 
+            {% else %}
+                stranger!
+            {% endif %}
+        </h3>
+        <p class="sidebarinfo">Sign up to save your current mail address or login if you already have an account.</p>
         {% if current_user.is_authenticated %}
-
+             Your Address: {{current_user.email}}
         {% else %}
-            <a class="btn btn-primary loginbutton" href="{{url_for('login')}}">Log in</a>
-            <a class="btn btn-primary loginbutton" href="{{url_for('signup')}}">Sign up</a>
+            <div class="sidebarbtns">
+                <a class="btn btn-primary loginbutton" href="{{url_for('signup')}}">Sign up</a>
+                <a class="btn btn-primary loginbutton" href="{{url_for('login')}}">Log in</a>
+                
+            </div>
+            
         {% endif %}
     </div>
 </div>

@@ -1,10 +1,10 @@
 from my_server import app, db, bcrypt, socketio
-from flask import render_template, url_for, flash, redirect, request, session
+from flask import render_template, url_for, flash, redirect, request, session, abort
 from my_server.forms import LoginFrom, RegistrationFrom
 from my_server.dbhandler import User, Mail
 from flask_login import login_user, current_user, logout_user, login_required
 from RandomWordGenerator import RandomWord
-from flask_socketio import SocketIO, emit, send
+from flask_socketio import SocketIO, emit, send, join_room, leave_room
 import json
 
 app.config['SECRET_KEY'] = 'b9dfdf3f8d2bb591f39d5a1337dbacd0'
@@ -28,10 +28,23 @@ def newMail():
 @app.route('/index')
 @app.route('/start', methods=['GET'])
 def start():
-    if not gotmail():
+    if current_user.is_authenticated:
+        return render_template('start.html', mailadd=current_user.email, title='Start')
+    elif gotmail():
+        return render_template('start.html', mailadd=session['mail'], title='Start')
+    else:
         return render_template('start.html', mailadd=newMail(), title='Start')
-    return render_template('start.html', mailadd=session['mail'], title='Start')
     
+
+
+@app.route('/about', methods=['GET'])
+def about():
+    totmails = Mail.query.count()
+    totusers = User.query.count()
+    if current_user.is_authenticated:
+        usermails = Mail.query.filter(Mail.to == current_user.email).count()
+        return render_template('about.html', totmails=totmails, totusers=totusers, usermails=usermails)
+    return render_template('about.html', totmails=totmails, totusers=totusers)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -44,10 +57,8 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.rememberme.data)
             flash('You have been logged in', 'success')
-            print('23213333333333')
             return redirect(url_for('start'))
         else:
-            print('asddddddddddddddddddd')
             flash('Incorrect email or password', 'danger')
     return render_template('login.html', title='5minmail', form=form)
 
@@ -59,6 +70,7 @@ def signup():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, password=hashed_pw)
         db.session.add(user)
+        user.email = session['mail']
         db.session.commit()
         flash('Account created. Please log in.', 'success')
         return redirect(url_for('login'))
@@ -68,6 +80,7 @@ def signup():
 @app.route('/logout')
 def logout():
     logout_user()
+    session.clear()
     flash('You have benn logged out', 'success')
     return redirect(url_for('start'))
 
@@ -76,6 +89,7 @@ def recieve_mail():
     new_mail = Mail(sender=request.form['from'], to=request.form['to'], subject=request.form['subject'], body=request.form['text'])
     db.session.add(new_mail)
     db.session.commit()
+    socketio.emit('getnewmails')
     return ''
 
 
@@ -89,12 +103,18 @@ def serializeAll(mails):
         maildict.append(mail.serialize)
     return maildict
 
-@socketio.on('message')
-def refeshdata(data):
-    print('received message: ' + data)
+@socketio.on('connect')
+def io_connect():
+    print('CLIENT CONNECTED')
+
+
+@socketio.on('join')
+def on_join():
+    join_room(session['mail'])
+    
 
 @socketio.on('mailrefresh')
 def mailrefresh():
     data = json.dumps(serializeAll(getMails(session['mail'])))
     print(data)
-    socketio.emit('mailrefresh', data)
+    socketio.emit('mailrefresh', data, room=session['mail'])

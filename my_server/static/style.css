@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
 }
 
 h2::selection {
@@ -22,7 +23,7 @@ body {
   background: #667db6;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  position: relative;
 }
 
 .container {
@@ -40,6 +41,7 @@ body {
 .mailbox{
     height: 45vh;
     width: 100%;
+    max-width: 538px;
     display: flex;
     border-radius: 1;
     overflow-y: auto;
@@ -58,7 +60,7 @@ body {
 
 .mailtable{
   width: 100%;
-  
+  table-layout: fixed;
   
 }
 
@@ -68,7 +70,9 @@ body {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
-  border-bottom: 1px solid black;
+  border: 2px solid black;
+  border-right: 4px solid black;
+  border-left: 4px solid black;
   
 }
 
@@ -79,6 +83,9 @@ body {
   
 }
 
+
+
+
 .inboxtxt{
   font-size:2rem;
   color: white;
@@ -87,28 +94,36 @@ body {
 .tempmailbox{
   width: 100%;
   padding:8px;
+  border-radius: 10px;
   height:6%;
   text-align: center;
   border: 2px solid black;
   background-color: #ff4e00;
-    background-image: linear-gradient(315deg, #ec9f05 0%,#ff4d00cb 74%);
+  background-image: linear-gradient(315deg, #ec9f05 0%,#ff4d00cb 74%);
   margin-bottom: 30px;
+  
+}
+
+#mailtext{
+  position: relative;
 }
 
 .mailbox{
   background-color: #ff4e00;
   background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
   border: 2px solid black;
+  border-radius: 10px;
   
 }
 
 .refresh{
-    width: 7%;
+    width: 20%;
     margin-top: 1vh;
 }
 
 .sidebar{
-
+  border-radius: 10px;
+  border: 4px solid black;
 }
 
 
@@ -174,14 +189,17 @@ ul{
 
 
 .alert{
-  margin: 0 auto;
+  align-content: center;
   margin-top: 15px;
-  width: 35%;
-  position: absolute;
+  text-align: center;
 }
 
 .alert-container {
-  position: relative;
+  position: absolute;
+  left:40%;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
 }
 
 h3{
@@ -198,9 +216,85 @@ h3{
   border: 1px solid black;
 }
 
-.loginbutton{
-  margin:0 auto;
-  align-content: center;
-  justify-content: center;
+.sidebarbtns{
+  display: flex;
+  justify-content: space-around;
+  
 }
 
+.loginbutton{
+  align-self: flex-end;
+
+}
+
+.signupbutton{
+
+}
+
+.sidebarinfo{
+  text-align: center;
+  padding: 10px;
+
+}
+
+.copybutton{
+  background-color: transparent;
+  border:none;
+  position: absolute;
+  right: 0;
+}
+
+.copybutto:active{
+  border:none;
+}
+
+
+.about{
+  width: 30%;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #ff4e00;
+  background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+  padding-bottom: 100px;
+  margin: 0 auto;
+  margin-top: 10vh;
+}
+
+.info{
+  padding:20px;
+}
+
+.stat{
+  margin:auto;
+  padding:20px;
+  font-size: 1.2rem;
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+
+
+footer{
+  height: 10vh;
+  background-color: #ff4e00;
+  background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+  align-content: center;
+  text-align: center;
+}
+
+.footerlist{
+  height: 10px;
+  align-content: center;
+  justify-content: space-evenly;
+}
+
+.footertext{
+  
+  
+}
+
+
+
+.logodiv{
+  display: flex;
+}
